@@ -1,6 +1,6 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
+language: r
 sudo: required
 cache: packages
 bioc_required: true
@@ -23,6 +23,11 @@ matrix:
     - os : osx
       r : bioc-devel
       
+  include:
+    - language: python
+      python: "3.6"
+      before_script: "cd inst/python&&pip install -r requirement.txt"
+      script: "pytest"
 before_install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then sudo apt-get install python3; fi
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then sudo apt-get install python3-pip; fi
@@ -38,5 +43,3 @@ before_install:
   - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then sudo pip3 install requests; fi
   - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then sudo pip3 install bs4; fi
   - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then sudo pip3 install lxml; fi
-
-    

@@ -50,7 +50,7 @@ def get_multiple_id(db, ids, field):
             ret.append(query.query(db, [key])[0][field])
         except:
             print(key)
-            continuehu
+            continue
     return ret
 
 def get_row(row):
